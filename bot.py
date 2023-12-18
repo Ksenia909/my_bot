@@ -14,6 +14,10 @@ async def main() -> None:
     bot = Bot(token=config.tg_bot.token)
     dp = Dispatcher()
 
+    #Регистрация роутеров в диспетчере
+    dp.include_router(user_handlers.router)
+    dp.include_router(other_handlers.router)
+
     #Пропуск накопившихся апдейтов и запуск polling
     await bot.delete_webhook(drop_pending_updates=True)
     await dp.start_polling(bot)
